@@ -53,6 +53,7 @@ module.exports = {
     "max-len": [0, // 强制行的最大长度
       { "code": 200 }
     ],
+    "object-curly-newline": 0, // http://t.cn/RspPF79
     "class-methods-use-this": 0, // http://t.cn/RspzXL2
     "prefer-destructuring": [ 2, // Prefer destructuring from arrays and objects: http://t.cn/RsptuV3
       {
