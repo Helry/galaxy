@@ -1,6 +1,4 @@
-import {
-  AppRegistry, YellowBox, Text, TextInput, Platform,
-} from 'react-native'
+import { AppRegistry, YellowBox, Text, TextInput, Platform } from 'react-native'
 import addCustomProps from 'react-native-add-custom-props'
 import App from './App'
 import { name as appName } from './app.json'

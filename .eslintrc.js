@@ -29,6 +29,7 @@ module.exports = {
     "no-use-before-define": [2, {"functions": false, "classes": true, "variables": false}],
     "semi": [2, 'never'],
     "max-len": [2, { "code": 150 }],
+    "object-curly-newline": 0,
     "import/first": 0,
     "import/no-named-as-default-member":0,
     "jsx-a11y/accessible-emoji":0,
