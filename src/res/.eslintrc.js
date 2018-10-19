@@ -41,6 +41,7 @@ module.exports = {
   ],
   // Configuring Rules: http://t.cn/RsNOvYE
   rules: {
+    "linebreak-style": [2,"unix"],
     "semi": [2, 'never'], // 不允许使用分号: http://t.cn/RsNWpgh
     "eqeqeq": 0,
     'no-console': 0, // 不允许使用console: http://t.cn/RsNYNiO
