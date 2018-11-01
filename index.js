@@ -21,6 +21,6 @@ if (!__DEV__) {
 }
 
 // 关闭全部的黄屏警告
-YellowBox.ignoreWarnings([''])
+YellowBox.ignoreWarnings()
 
 AppRegistry.registerComponent(appName, () => App)
