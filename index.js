@@ -6,7 +6,7 @@ import { name as appName } from './app.json'
 YellowBox.ignoreWarnings(['']) // 关闭全部的警告
 
 // 处理ios系统文字
-if (iOS) {
+if (global.iOS) {
   addCustomProps(Text, { allowFontScaling: false })
   addCustomProps(TextInput, { allowFontScaling: false })
 }
