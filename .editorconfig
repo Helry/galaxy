@@ -17,6 +17,3 @@ indent_size = 4
 
 [BUCK]
 indent_size = 4
-
-[.md]
-indent_size = 4

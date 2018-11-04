@@ -6,7 +6,18 @@
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "test": "jest",
     "docs:dev": "vuepress dev docs",
-    "docs:build": "vuepress build docs"
+    "docs:build": "vuepress build docs",
+    "clean": "cd android && ./gradlew clean",
+    "dev": "yarn clean && react-native run-android",
+    "assembleRelease": "cd android && ./gradlew assembleRelease",
+    "installRelease": "cd android && ./gradlew installRelease",
+    "keygen": "keytool -genkey -v -keystore my-release-key.keystore -alias my-key-alias -keyalg RSA -keysize 2048 -validity 36500",
+    "key-debug": "keytool -list -v -keystore ~/.android/debug.keystore",
+    "key-release": "keytool -v -list -keystore  ./android/app/my-release-key.keystore",
+    "bundle-android": "react-native bundle --entry-file index.js --bundle-output ./android-bundle/index.android.bundle --platform android --assets-dest ./android-bundle --dev false --sourcemap-output ./android-bundle/android-release.bundle.map",
+    "bundle-ios": "react-native bundle --entry-file index.js --bundle-output ./ios-bundle/index.ios.bundle --platform ios --assets-dest ./ios-bundle --dev false --sourcemap-output ./ios-bundle/ios-release.bundle.map",
+    "code-push-ios": "code-push release-react mobileapp  ios  -d Staging --targetBinaryVersion 1.0.0",
+    "code-push-android": "code-push release-react mobileapp  android  -d Staging --targetBinaryVersion 1.0.0"
   },
   "dependencies": {
     "react": "16.6.0-alpha.8af6728",
