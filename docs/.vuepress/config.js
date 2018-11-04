@@ -16,12 +16,7 @@ module.exports = {
     nav: [
       { text: '配置', link: '/' },
       { text: '数据持久化', link: '/data-persistence/' },
-      {
-        text: '状态管理',
-        items: [
-          { text: 'Mobx', link: '/state-management/mobx.html' },
-        ]
-      },
+      { text: 'Mobx', link: '/Mobx\/' }
     ], // 导航栏
     sidebar: 'auto', // 自动生成侧栏
     lastUpdated: 'Last Updated', // 最后更新时间
