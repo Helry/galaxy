@@ -7,6 +7,7 @@
     "test": "jest",
     "docs:dev": "vuepress dev docs",
     "docs:build": "vuepress build docs",
+    "nox": "adb connect 127.0.0.1:62001",
     "clean": "cd android && ./gradlew clean",
     "dev": "yarn clean && react-native run-android",
     "assembleRelease": "cd android && ./gradlew assembleRelease",
