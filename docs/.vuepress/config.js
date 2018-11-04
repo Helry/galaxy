@@ -1,14 +1,14 @@
 module.exports = {
-  base: '/yangjunning/',
-  title: 'yangjunning',
+  base: '/galaxy/',
+  title: 'galaxy',
   description: 'react native demo',
   head: [
     ['link', { rel: 'icon', href: '/favicon.png' }]
   ],
   themeConfig: {
-    repo: 'youngjuning/yangjunning',
+    repo: 'youngjuning/galaxy',
     repoLabel: 'GitHub',
-    docsRepo: 'youngjuning/yangjunning',
+    docsRepo: 'youngjuning/galaxy',
     docsDir: 'docs',
     docsBranch: 'master',
     editLinks: true,
