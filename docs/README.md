@@ -195,8 +195,8 @@ maven {
 ```properties
 MYAPP_RELEASE_STORE_FILE=my-release-key.keystore
 MYAPP_RELEASE_KEY_ALIAS=my-key-alias
-MYAPP_RELEASE_STORE_PASSWORD=123456
-MYAPP_RELEASE_KEY_PASSWORD=123456
+MYAPP_RELEASE_STORE_PASSWORD=****
+MYAPP_RELEASE_KEY_PASSWORD=****
 ```
 
 4. 配置 **android/app/build.gradle**
@@ -210,7 +210,7 @@ android{
                 storeFile file(MYAPP_RELEASE_STORE_FILE)
                 storePassword MYAPP_RELEASE_STORE_PASSWORD
                 keyAlias MYAPP_RELEASE_KEY_ALIAS
-                keyPassword MYAPP_RELEASE_KEY_PASSWORD=123456
+                keyPassword MYAPP_RELEASE_KEY_PASSWORD
             }
         }
     }
