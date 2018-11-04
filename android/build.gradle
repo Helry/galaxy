@@ -9,6 +9,14 @@ buildscript {
         supportLibVersion = "27.1.1"
     }
     repositories {
+        maven{
+        	url 'http://maven.aliyun.com/nexus/content/groups/public/'
+        	name 'aliyun'
+        }
+        maven {
+            url "https://jitpack.io"
+            name 'jitpack'
+        }
         google()
         jcenter()
     }
@@ -22,6 +30,14 @@ buildscript {
 
 allprojects {
     repositories {
+        maven{
+        	url 'http://maven.aliyun.com/nexus/content/groups/public/'
+        	name 'aliyun'
+        }
+        maven {
+            url "https://jitpack.io"
+            name 'jitpack'
+        }
         google()
         mavenLocal()
         jcenter()

@@ -1,7 +1,14 @@
-/** @format */
+import { AppRegistry, YellowBox, Text, TextInput } from 'react-native'
+import addCustomProps from 'react-native-add-custom-props'
+import App from './App'
+import { name as appName } from './app.json'
 
-import {AppRegistry} from 'react-native';
-import App from './App';
-import {name as appName} from './app.json';
+YellowBox.ignoreWarnings(['']) // 关闭全部的警告
 
-AppRegistry.registerComponent(appName, () => App);
+// 处理ios系统文字
+if (iOS) {
+  addCustomProps(Text, { allowFontScaling: false })
+  addCustomProps(TextInput, { allowFontScaling: false })
+}
+
+AppRegistry.registerComponent(appName, () => App)

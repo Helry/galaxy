@@ -20,6 +20,16 @@ React Native 中文网（以下我们简称“中文网”）对此已经做了�
 - [react-native-debugger](http://t.cn/EhzKUdI)
 - [reactotron](http://t.cn/EhzKUdI)
 
+**模拟器调试**
+
+1. 下载安装 [夜神模拟器](https://www.yeshen.com/)
+2. 打开夜神模拟器
+3. 执行 `adb connect localhost:62001` 连接夜神模拟器
+4. 启动项目：`react-native run-android`
+5. 如果出现如下错误，可点击模拟器的摇一摇或者菜单键进入Dev Settings下的Debug server host & port for device，然后设置为你本地的ip，端口号为8081，reload;
+  ![](https://img-blog.csdn.net/20180316142006249)
+  ![](https://img-blog.csdn.net/20180316142135743)
+
 ## 三、创建一个新项目
 
 使用 React Native 命令行工具来创建一个名为"AwesomeProject"的新项目：
@@ -126,4 +136,123 @@ indent_size = 4
 
 [BUCK]
 indent_size = 4
+```
+
+### 4.5、屏蔽所有 YellowBox
+
+**index.js**
+
+```js
+// 关闭全部的警告
+YellowBox.ignoreWarnings([''])
+
+// 或者通过这句代码屏蔽 YellowBox
+// console.disableYellowBox = true
+```
+
+## 五、Android
+
+### 5.1、Maven 仓库
+
+::: tip
+aliyun是为了加快下载速度、jitpack是因为有些库需要它
+:::
+
+将以下代码配置到`android/build.gradle` 配置文件的 `buildscript/repositories` 和 `allprojects/repositories` 下
+
+```grrovy
+maven{
+    url 'http://maven.aliyun.com/nexus/content/groups/public/'
+    name 'aliyun'
+}
+maven {
+    url "https://jitpack.io"
+    name 'jitpack'
+}
+```
+
+### 5.2、打包APK
+
+1. 在项目根目录执行 `yarn keygen` 生成密钥文件 `my-release-key.keystore`
+2. 把 `my-release-key.keystore` 文件放到你工程中的 `android/app` 文件夹下。
+3. 编辑 `android/gradle.properties` ，添加如下的代码（注意把其中的****替换为相应密码）
+3. 编辑 `android/gradle.properties` ，添加如下的代码（注意把其中的****替换为相应密码）
+
+```properties
+MYAPP_RELEASE_STORE_FILE=my-release-key.keystore
+MYAPP_RELEASE_KEY_ALIAS=my-key-alias
+MYAPP_RELEASE_STORE_PASSWORD=123456
+MYAPP_RELEASE_KEY_PASSWORD=123456
+```
+
+4. 配置 **android/app/build.gradle**
+
+```groovy
+android{
+    signingConfigs {
+        debug {}
+        release {
+            if (project.hasProperty('MYAPP_RELEASE_STORE_FILE')) {
+                storeFile file(MYAPP_RELEASE_STORE_FILE)
+                storePassword MYAPP_RELEASE_STORE_PASSWORD
+                keyAlias MYAPP_RELEASE_KEY_ALIAS
+                keyPassword MYAPP_RELEASE_KEY_PASSWORD=123456
+            }
+        }
+    }
+    buildTypes {
+        release {
+            signingConfig signingConfigs.release
+            ...
+        }
+    }
+}
+```
+
+## 其他
+
+### 处理系统文字
+
+#### Android
+
+在 **android\app\src\main\java\com\galaxy\MainApplication.java** 文件中加入如下代码：
+
+```java
+...
+import android.content.res.Configuration;
+import android.content.res.Resources;
+...
+// 让文字不随系统文字变化：http://t.cn/Rs26Veb
+@Override
+public void onConfigurationChanged(Configuration newConfig) {
+  if (newConfig.fontScale != 1)//非默认值
+    getResources();
+  super.onConfigurationChanged(newConfig);
+}
+
+@Override
+public Resources getResources() {
+  Resources res = super.getResources();
+  if (res.getConfiguration().fontScale != 1) {//非默认值
+    Configuration newConfig = new Configuration();
+    newConfig.setToDefaults();//设置默认
+    res.updateConfiguration(newConfig, res.getDisplayMetrics());
+  }
+  return res;
+}
+```
+
+#### iOS
+
+1. 安装 **react-native-add-custom-props** : `yarn add react-native-add-custom-props`
+2. 在 `index.js` 中配置如下
+```js
+...
+import addCustomProps from 'react-native-add-custom-props'
+...
+// 处理ios系统文字
+if (iOS) {
+  addCustomProps(Text, { allowFontScaling: false })
+  addCustomProps(TextInput, { allowFontScaling: false })
+}
 ```

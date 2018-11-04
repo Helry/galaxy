@@ -5,7 +5,7 @@
  */
 
 import React from 'react'
-import { StyleSheet, Image, View } from 'react-native'
+import { StyleSheet, Image, View, Text } from 'react-native'
 
 const App = () => (
   <View style={styles.container}>
@@ -14,10 +14,13 @@ const App = () => (
       source={{ uri: 'https://placeimg.com/400/400/any' }}
       style={[styles.welcome]}
     />
+
+    <Text>React Native Text</Text>
   </View>
 )
 
 const styles = StyleSheet.create({
+
   container: {
     flex: 1,
     justifyContent: 'center',
