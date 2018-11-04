@@ -43,6 +43,20 @@ $ react-native init AwesomeProject
 - 你还可以使用 `--tepmlate` 参数创建指定模版的项目。例如 `react-native init MyApp --template youngjuning`。模版可以去 npm 搜索，格式是 `react-native-template-*`
 :::
 
+### react-native 0.57.* 适配
+
+- [react-native-releases/CHANGELOG.md](http://t.cn/EwYmviS)
+- [react-native版本迁移教程](https://www.jianshu.com/p/cc0174b4a9c5)
+
+1. 安装babel相关库： `yarn add @babel/core @babel/plugin-proposal-decorators @babel/plugin-transform-runtime @babel/runtime`
+2. 如果使用了装饰器（Mobx用得到），则需要配置 `.babelrc`:
+```json
+"plugins": [
+  ["@babel/plugin-proposal-decorators", { "legacy": true }],
+  ["@babel/transform-runtime", {"helpers": true,"regenerator": false }]
+]
+```
+
 ## 四、优化开发体验
 
 ### 4.1、npm scripts
