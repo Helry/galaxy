@@ -93,6 +93,10 @@ def enableSeparateBuildPerCPUArchitecture = false
  */
 def enableProguardInReleaseBuilds = true
 
+def releaseTime() {
+    return new Date().format("yyyyMMdd-HHmmss", TimeZone.getTimeZone("GMT+08:00"))
+}
+
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
     buildToolsVersion rootProject.ext.buildToolsVersion
@@ -141,6 +145,10 @@ android {
     }
     // applicationVariants are e.g. debug, release
     applicationVariants.all { variant ->
+        variant.outputs.all {
+            // the apk name is e.g. sishucloudapp_v1.0_2018-11-1.apk
+            outputFileName = "galaxy_${defaultConfig.versionName}_${releaseTime()}.apk"
+        }
         variant.outputs.each { output ->
             // For each separate APK per architecture, set a unique version code as described here:
             // http://tools.android.com/tech-docs/new-build-system/user-guide/apk-splits

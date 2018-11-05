@@ -441,6 +441,40 @@ android {
 
 微信AndResGuard是一个帮助你缩小APK大小的工具，详情：![Android资源混淆工具使用说明](https://github.com/shwenzhang/AndResGuard)。使用方法：
 
+### 5.4 自定义安卓打包的后缀
+
+```groovy
+...
+def releaseTime() {
+    return new Date().format("yyyyMMdd-HHmmss", TimeZone.getTimeZone("GMT+08:00"))
+}
+...
+android: {
+    applicationVariants.all { variant ->
+    		variant.outputs.all {
+            // the apk name is e.g. sishucloudapp_v1.0_2018-11-1.apk
+            outputFileName = "sishucloudapp_${defaultConfig.versionName}_${releaseTime()}.apk"
+        }
+        ...
+    }
+}
+...
+```
+
+### 5.5、配置App名称
+
+很简单,我们直接打开 **android/app/src/main/res/values/strings.xml**，即可看到配置中的 `app_name`，修改为你想要的即可:
+
+```xml
+<resources>
+  <string name="app_name">银河</string>
+</resources>
+```
+
+### 5.6、修改App的图标
+
+也很简单，在 **android\app\src\main\res\mipmap-xxxxxx** 中直接覆盖图标就可以，注意图标的大小。
+
 ## 其他
 
 ### 处理系统文字
