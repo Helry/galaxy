@@ -14,8 +14,7 @@ const App = () => (
       source={{ uri: 'https://placeimg.com/400/400/any' }}
       style={[styles.welcome]}
     />
-
-    <Text>React Native Text</Text>
+    <Text onPress={() => { alert('我是文字') }}>React Native Text</Text>
   </View>
 )
 
