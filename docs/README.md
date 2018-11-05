@@ -22,8 +22,8 @@ React Native 中文网（以下我们简称“中文网”）对此已经做了�
 
 **模拟器调试**
 
-1. 下载安装 [夜神模拟器](https://www.yeshen.com/)
-2. 打开夜神模拟器
+1. 下载安装 [MUMU模拟器](http://mumu.163.com/)
+2. 打开MUMU模拟器
 3. 执行 `adb connect localhost:62001` 连接夜神模拟器
 4. 启动项目：`react-native run-android`
 5. 如果出现如下错误，可点击模拟器的摇一摇或者菜单键进入Dev Settings下的Debug server host & port for device，然后设置为你本地的ip，端口号为8081，reload;
@@ -56,6 +56,7 @@ $ react-native init AwesomeProject
   ["@babel/transform-runtime", {"helpers": true,"regenerator": false }]
 ]
 ```
+3. 如果
 
 ## 四、优化开发体验
 
