@@ -11,7 +11,9 @@ React Native 中文网（以下我们简称“中文网”）对此已经做了�
 - NodeJs开发环境维护：[http://t.cn/EwjGwYE](http://t.cn/EwjGwYE)
 - Java环境维护：[http://t.cn/EwjGwYE](http://t.cn/EwjG8TQ)
 
-## 二、调试工具
+## 二、工具
+
+### 调试工具
 
 - react-devtools
   - [Chrome React Developer Tools](http://t.cn/RZ9KB7U)
@@ -19,6 +21,14 @@ React Native 中文网（以下我们简称“中文网”）对此已经做了�
   - [Standalone app](http://t.cn/Ewjqgec)
 - [react-native-debugger](http://t.cn/EhzKUdI)
 - [reactotron](http://t.cn/EhzKUdI)
+
+### 优化分析工具
+
+- [nimbledroid](https://nimbledroid.com/)
+
+### 反编译工具
+
+- [jadx](https://github.com/skylot/jadx)
 
 **模拟器调试**
 
@@ -263,6 +273,173 @@ android{
     }
 }
 ```
+
+### 5.3、打包优化
+
+#### 1、启用 Proguard 代码混淆来缩小 APK文件的大小
+
+Proguard是一个Java字节码混淆压缩工具，它可以移除掉 React Native Java（和它的依赖库中）中没有被使用到的部分，最终有效的减少APK的大小。
+
+打开 `android/app/build.gradle` 文件，设置 `minifyEnabled` 选项为 `true`：
+
+```groovy
+def enableProguardInReleaseBuilds = true
+```
+
+::: warning
+警告：启用Proguard之后，你必须再次全面地测试你的应用。Proguard有时候需要为你引入的每个原生库做一些额外的配置。参见 app/proguard-rules.pro 文件和每个原生库的安装说明
+
+当您使用ProGuard时，您必须始终解决所有警告。
+
+这些警告告诉你，这些库引用了一些代码，没有任何来源。那可能可能不行这取决于有问题的代码是否被调用。http://t.cn/EwIL17p
+:::
+
+#### 2、配置 PackagingOptions
+
+打开 `android/app/build.gradle` 文件
+
+```grrovy
+// 打包配置（http://t.cn/Ewt1xD2）
+packagingOptions {
+    /**
+     * 1、pickFirsts:当出现重复文件，会使用第一个匹配的文件打包进入apk
+     * 2、merges:当出现重复文件，合并重复的文件打入apk
+     * 3、excludes:打包的时候排除匹配的文件
+     */
+    /* pickFirsts = ['META-INF/LICENSE'] */
+    /* merge 'META-INF/LICENSE' */
+    exclude 'META-INF/LICENSE'
+    exclude 'META-INF/NOTICE.txt'
+}
+```
+
+#### 3、配置 splits（可选）
+
+默认情况下，生成的 APK 会同时包含针对于 x86 和 ARMv7a 两种 CPU 架构的原生代码。这样可以让我们更方便的向其他人分享这个 APK，因为它几乎可以运行在所有的 Android 设备上。但是，这会导致所有设备上都有一些根本不会运行的代码，白白占据了空间。目前安卓设备绝大多数是 ARM 架构，因此对于大部分应用来说可以考虑去掉 x86 架构的支持。
+
+你可以在 `android/app/build.gradle` 中修改如下代码（false 改为 true）来生成针对不同 CPU 架构的 APK。
+
+> 具体参考：http://t.cn/Ewchm37
+
+#### 4、开启 zipAlignEnabled
+
+> zipalign的工具的使用：http://t.cn/EwcA9K8
+
+这里只是优化apk，没有执行压缩相关操作
+
+```groovy
+buildTypes {
+  release {
+      signingConfig signingConfigs.release
+      minifyEnabled enableProguardInReleaseBuilds
+      zipAlignEnabled true // 对齐zip
+      proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
+  }
+}
+```
+
+#### 6、开启 shrinkResources 和 设置debuggable为false
+
+> 移除无用的resource文件：http://t.cn/EwcLLUa
+
+```groovy
+buildTypes {
+  release {
+      signingConfig signingConfigs.release
+      minifyEnabled enableProguardInReleaseBuilds
+      zipAlignEnabled true
+      shrinkResources true // 移除无用的resource文件
+      debuggable false // 是否debug
+      proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
+  }
+}
+```
+
+#### 6、去除无用的语言资源
+
+通过配置 `android/defaultConfig/resConfigs`  可以选择只打包哪几种语言，进而去掉各种 `aar` 包中全世界的语言，尤其是 **support** 包中的。
+
+选择保留什么语言要根据产品的用户和市场来定，如果只选择默认英语和中文语言，配置如下：
+
+```groovy
+defaultConfig {
+	...
+    resConfigs "en","zh" // 只使用英语和中文语言
+    ...
+}
+```
+
+#### 7、避免使用重复的库
+
+```groovy
+compile('com.facebook.android:audience-network-sdk:4.23.0', {
+    exclude group: 'com.android.support', module: 'appcompat-v7'// 因为项目引用了v7包，这里排除第三方库的v7包，避免重复
+})
+compile('com.google.firebase:firebase-ads:9.6.1', {
+    exclude group: 'com.android.support' // 因为项目引用了v7包，这里排除第三方库的v7包，避免重复
+})
+```
+
+#### 8、使用 implementation 代替 compile
+
+![](https://i.loli.net/2018/11/02/5bdb50fb13fa5.png)
+
+如图，'compile' 已经被废弃并且已经被 'impementation' 和 'api' 代替.而且 2018 年底会彻底废弃，修复的话就是把 **android\app\build.gradle** 中的 `dependencies` 配置中的 `compile` 改为 `impementation`。
+
+#### 9、配置 dexOptions.javaMaxHeapSize
+
+> android studio 需要较大的内存才能正常编译项目
+
+在 **android\gradle.properties** 中加入以下配置
+
+```properties
+# 主要解决这个警告：com.android.build.api.transform.TransformException：http://t.cn/EZcTDtV
+dexOptions.javaMaxHeapSize = 2g
+```
+
+#### 10、配置方法数超过 64K 的应用
+
+> 随着 Android 平台的持续成长，Android 应用的大小也在增加。当您的应用及其引用的库达到特定大小时，您会遇到构建错误，指明您的应用已达到 Android 应用构建架构的极限。会报告这一错误：
+>
+>  The number of method references in a .dex file cannot exceed 64K.
+
+解决办法是配置您的应用进行 Dalvik 可执行文件分包：
+
+在 **android/app/build.gradle** 中做下面的配置：
+
+```groovy
+android {
+    ...
+    defaultConfig {
+        ...
+        multiDexEnabled true
+        ...
+    }
+    ...
+}
+```
+
+#### 11、删除未使用到xml和图片
+
+如何知道哪些xml和图片未被使用到？使用Android Studio的Lint，步骤：
+
+1. `Android Studio` -> `Menu` -> `Refactor` -> `Remove Unused Resources`
+2. 选择 `Refactor` 一键删除
+3. 选择 `Perview` 预览未使用到的资源
+
+或者
+
+点击菜单栏 `Analyze` -> `Run Inspection by Name` -> `unused resources` -> `Moudule ‘app’` -> `OK`，这样会搜出来哪些未被使用到未使用到xml和图片，如下：
+
+![](http://wuxiaolong.me/images/reduceAPKSize1.png)
+
+#### 12、删除未使用到代码
+
+同样使用 Android Studio 的 Lint ，步骤：点击菜单栏 `Analyze` -> `Run Inspection by Name` -> `unused declaration` -> `Moudule ‘app’` -> `OK`
+
+#### 13、使用微信Android资源混淆工具（可选）
+
+微信AndResGuard是一个帮助你缩小APK大小的工具，详情：![Android资源混淆工具使用说明](https://github.com/shwenzhang/AndResGuard)。使用方法：
 
 ## 其他
 

@@ -91,7 +91,7 @@ def enableSeparateBuildPerCPUArchitecture = false
 /**
  * Run Proguard to shrink the Java bytecode in release builds.
  */
-def enableProguardInReleaseBuilds = false
+def enableProguardInReleaseBuilds = true
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
@@ -106,6 +106,8 @@ android {
         ndk {
             abiFilters "armeabi-v7a", "x86"
         }
+        resConfigs "zh" // 只使用中文语言
+        multiDexEnabled true
     }
     splits {
         abi {
@@ -128,6 +130,10 @@ android {
     }
     buildTypes {
         release {
+            debuggable false // 是否debug
+            aaptOptions.cruncherEnabled=false // http://t.cn/EwQnc12
+            shrinkResources true // 移除无用的resource文件
+            zipAlignEnabled true // 对齐zip
             signingConfig signingConfigs.release
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
