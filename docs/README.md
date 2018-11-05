@@ -48,6 +48,8 @@ $ react-native init AwesomeProject
 - [react-native-releases/CHANGELOG.md](http://t.cn/EwYmviS)
 - [react-native版本迁移教程](https://www.jianshu.com/p/cc0174b4a9c5)
 
+### ES6 装饰器(decorators)及runtime 支持
+
 1. 安装babel相关库： `yarn add @babel/core @babel/plugin-proposal-decorators @babel/plugin-transform-runtime @babel/runtime`
 2. 如果使用了装饰器（Mobx用得到），则需要配置 `.babelrc`:
 ```json
@@ -56,7 +58,30 @@ $ react-native init AwesomeProject
   ["@babel/transform-runtime", {"helpers": true,"regenerator": false }]
 ]
 ```
-3. 如果
+
+### Symbol语法支持
+
+> 如果还不知道 Symbol 为何物的朋友，墙裂推荐读读 [ES6的Symbol竟然那么强大，面试中的加分点啊](http://t.cn/EwuvKej) 这篇文章
+
+::: warning
+Can't find variable: Symbol
+:::
+
+如上警告，不幸的是，React Native 中默认是不支持 Symbol的，幸运的是我们并不是对此束手无策，下面我就为大家推荐两种解决办法：
+
+你可是使用 ES6 Symbol polyfill 来支持：
+
+```bash
+$ yarn add es6-symbol
+```
+
+并把下面的代码加入 `index.js`
+
+```
+import 'es6-symbol/implement'
+```
+
+另外，我们也推荐 [jsc-android](http://t.cn/EwuPlyh)，使用它你可以不必使用polyfill，并且它还能使你的app更快。
 
 ## 四、优化开发体验
 
