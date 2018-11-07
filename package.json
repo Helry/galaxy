@@ -12,6 +12,7 @@
     "mumu": "adb connect 127.0.0.1:7555",
     "dis-mumu": "adb disconnect 127.0.0.1:7555",
     "clean": "cd android && ./gradlew clean",
+    "stop": "cd android && ./gradlew stop",
     "dev": "yarn clean && react-native run-android",
     "release": "cd android && ./gradlew assembleRelease",
     "installRelease": "cd android && ./gradlew installRelease",

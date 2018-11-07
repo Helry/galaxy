@@ -3,6 +3,7 @@ import addCustomProps from 'react-native-add-custom-props'
 import './src/utils/global'
 import App from './App'
 import { name as appName } from './app.json'
+import ErrorPage from './src/pages/ErrorPage'
 
 YellowBox.ignoreWarnings(['']) // 关闭全部的警告
 
@@ -12,4 +13,4 @@ if (iOS) {
   addCustomProps(TextInput, { allowFontScaling: false })
 }
 
-AppRegistry.registerComponent(appName, () => App)
+AppRegistry.registerComponent(appName, () => ErrorPage)

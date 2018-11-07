@@ -316,11 +316,11 @@ packagingOptions {
 
 你可以在 `android/app/build.gradle` 中修改如下代码（false 改为 true）来生成针对不同 CPU 架构的 APK。
 
-> 具体参考：http://t.cn/Ewchm37
+> 具体参考：[http://t.cn/Ewchm37](http://t.cn/Ewchm37)
 
 #### 4、开启 zipAlignEnabled
 
-> zipalign的工具的使用：http://t.cn/EwcA9K8
+> zipalign的工具的使用：[http://t.cn/EwcA9K8](http://t.cn/EwcA9K8)
 
 这里只是优化apk，没有执行压缩相关操作
 
@@ -337,7 +337,7 @@ buildTypes {
 
 #### 6、开启 shrinkResources 和 设置debuggable为false
 
-> 移除无用的resource文件：http://t.cn/EwcLLUa
+> 移除无用的resource文件：[http://t.cn/EwcLLUa](http://t.cn/EwcLLUa)
 
 ```groovy
 buildTypes {
