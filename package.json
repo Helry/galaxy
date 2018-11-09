@@ -21,14 +21,16 @@
     "key-release": "keytool -v -list -keystore  ./android/app/my-release-key.keystore",
     "bundle-android": "react-native bundle --entry-file index.js --bundle-output ./android-bundle/index.android.bundle --platform android --assets-dest ./android-bundle --dev false --sourcemap-output ./android-bundle/android-release.bundle.map",
     "bundle-ios": "react-native bundle --entry-file index.js --bundle-output ./ios-bundle/index.ios.bundle --platform ios --assets-dest ./ios-bundle --dev false --sourcemap-output ./ios-bundle/ios-release.bundle.map",
-    "code-push-ios": "code-push release-react mobileapp  ios  -d Staging --targetBinaryVersion 1.0.0",
-    "code-push-android": "code-push release-react mobileapp  android  -d Staging --targetBinaryVersion 1.0.0"
+    "push": "yarn push-android && yarn push-ios",
+    "push-android": "code-push release-react galaxyForAndroid android -d Staging",
+    "push-ios": "code-push release-react galaxyForIOS ios -d Staging"
   },
   "dependencies": {
     "jsc-android": "225067.x.x",
     "react": "16.6.0-alpha.8af6728",
     "react-native": "0.57.4",
     "react-native-add-custom-props": "^0.2.0",
+    "react-native-code-push": "^5.4.2",
     "react-navigation": "^2.18.2"
   },
   "devDependencies": {

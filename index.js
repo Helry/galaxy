@@ -13,4 +13,4 @@ if (iOS) {
   addCustomProps(TextInput, { allowFontScaling: false })
 }
 
-AppRegistry.registerComponent(appName, () => ErrorPage)
+AppRegistry.registerComponent(appName, () => App)

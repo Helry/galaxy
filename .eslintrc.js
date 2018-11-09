@@ -53,6 +53,7 @@ module.exports = {
     "object-curly-newline": 0,
     "prefer-destructuring": [ 2,{"array": false,"object": true}],
     "lines-between-class-members": ["error","always", {exceptAfterSingleLine: true}],
+    "default-case": 0,
     "import/first": 0,
     "import/no-named-as-default-member":0,
     "jsx-a11y/accessible-emoji":0,
