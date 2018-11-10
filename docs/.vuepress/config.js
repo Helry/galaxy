@@ -17,7 +17,8 @@ module.exports = {
       { text: '配置', link: '/' },
       { text: '数据持久化', link: '/data-persistence/' },
       { text: 'Mobx', link: '/Mobx/' }
-      { text: '热更新', link: '/hot-update/' }
+      { text: '热更新', link: '/hot-update/' },
+      { text: '原生模块', link: '/native-module/' }
     ], // 导航栏
     sidebar: 'auto', // 自动生成侧栏
     lastUpdated: 'Last Updated', // 最后更新时间
