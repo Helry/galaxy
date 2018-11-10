@@ -87,7 +87,7 @@ apply from: "../../node_modules/react-native-code-push/android/codepush.gradle"
  * Upload all the APKs to the Play Store and people will download
  * the correct one based on the CPU architecture of their device.
  */
-def enableSeparateBuildPerCPUArchitecture = true
+def enableSeparateBuildPerCPUArchitecture = false
 
 /**
  * Run Proguard to shrink the Java bytecode in release builds.
@@ -108,9 +108,9 @@ android {
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
-        // ndk {
-        //     abiFilters "armeabi-v7a", "x86"
-        // }
+        ndk {
+            abiFilters "armeabi-v7a", "x86"
+        }
         resConfigs "zh" // 只使用中文语言
         multiDexEnabled true
     }
@@ -136,7 +136,7 @@ android {
     buildTypes {
         release {
             debuggable false // 是否debug
-            aaptOptions.cruncherEnabled=false // http://t.cn/EwQnc12
+            aaptOptions.cruncherEnabled = false // 禁止Gradle检查PNG的合法性
             shrinkResources true // 移除无用的resource文件
             zipAlignEnabled true // 对齐zip
             signingConfig signingConfigs.release
