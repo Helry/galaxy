@@ -8,7 +8,7 @@ import React, { Component } from 'react'
 import { StyleSheet, Image, View, Button } from 'react-native'
 import CodePush from 'react-native-code-push'
 import checkHotUpdate from './src/utils/checkHotUpdate'
-import ToastExample from './src/components/ToastExample'
+import { ToastExample, IsDebug } from './src/components/Yang'
 
 const codePushOptions = {
   // 设置检查更新的频率
@@ -24,6 +24,11 @@ class App extends Component {
     checkHotUpdate(CodePush) // 开始检查更新
   }
 
+  isDebug = async () => {
+    const isDebug = await IsDebug.show()
+    alert(`isDebug：${isDebug}`)
+  }
+
   render() {
     return (
       <View style={styles.container}>
@@ -34,6 +39,12 @@ class App extends Component {
         />
         <Button
           onPress={() => ToastExample.show('Awesome', ToastExample.SHORT)}
+          title="调用原生模块"
+          color="#841584"
+          accessibilityLabel="Learn more about this purple button"
+        />
+        <Button
+          onPress={this.isDebug}
           title="调用原生模块"
           color="#841584"
           accessibilityLabel="Learn more about this purple button"
