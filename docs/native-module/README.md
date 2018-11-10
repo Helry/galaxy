@@ -72,3 +72,9 @@ createLibrary({
   generateExample: Boolean, /* Will generate a RN example project and link the new library to it (Default: `false`) */
 }
 ```
+
+## react-native-create-bridge
+
+> [peggyrayzis/react-native-create-bridge](https://github.com/peggyrayzis/react-native-create-bridge)
+
+> 一种可轻松连接React Native模块和UI组件的 CLI工具🎉

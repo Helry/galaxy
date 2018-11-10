@@ -5,9 +5,10 @@
  */
 
 import React, { Component } from 'react'
-import { StyleSheet, Image, View, Text } from 'react-native'
+import { StyleSheet, Image, View, Button } from 'react-native'
 import CodePush from 'react-native-code-push'
 import checkHotUpdate from './src/utils/checkHotUpdate'
+import ToastExample from './src/components/ToastExample'
 
 const codePushOptions = {
   // 设置检查更新的频率
@@ -31,7 +32,12 @@ class App extends Component {
           source={{ uri: 'https://placeimg.com/400/400/any' }}
           style={[styles.welcome]}
         />
-        <Text onPress={() => { alert('我是文字') }}>React Native Text</Text>
+        <Button
+          onPress={() => ToastExample.show('Awesome', ToastExample.SHORT)}
+          title="调用原生模块"
+          color="#841584"
+          accessibilityLabel="Learn more about this purple button"
+        />
       </View>
     )
   }

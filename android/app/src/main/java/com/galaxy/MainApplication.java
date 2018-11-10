@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 
+import com.yang.CustomToastPackage; // <-- 引入你自己的包
 import com.facebook.react.ReactApplication;
 import com.microsoft.codepush.react.CodePush;
 import com.facebook.react.ReactNativeHost;
@@ -22,7 +23,7 @@ public class MainApplication extends Application implements ReactApplication {
         protected String getJSBundleFile() {
         return CodePush.getJSBundleFile();
         }
-    
+
     @Override
     public boolean getUseDeveloperSupport() {
       return BuildConfig.DEBUG;
@@ -32,6 +33,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new CustomToastPackage(), // <-- 添加这一行，类名替换成你的Package类的名字.
             new CodePush(getResources().getString(R.string.reactNativeCodePush_androidDeploymentKey), getApplicationContext(), BuildConfig.DEBUG)
       );
     }
