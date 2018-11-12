@@ -160,27 +160,47 @@ export default (CodePush) => {
 }
 ```
 
-### 6.3 使用
+### 6.3 如何发布CodePush更新包
 
-#### 上传 bundle
+#### 7.1、手动生成bundle包【可略过】
 
-将生成的bundle文件上传到CodePush，我们直接执行下面的命令即可：
+::: tip
+在将RN的 `bundle` 放到 **AppCenter** 服务器之前，我们需要先生成 `bundle`，再将 `bundle` 上传到 **AppCenter**。用到的文件夹必须已经存在。
+:::
+
+- 生成 `bundle` 命名：`react-native bundle --platform 平台 --entry-file 启动文件 --bundle-output 打包js输出文件 --assets-dest 资源输出目录 --dev 是否调试`
 
 ```bash
-$ code-push release-react <AppName>
+$ react-native bundle --platform android --entry-file index.js --bundle-output ./bundle/android/main.jsbundle --assets-dest ./bundle/android --dev false
 ```
 
-```json
-"scripts": {
-  "push": "yarn push-android && yarn push-ios",
-  "push-android": "code-push release-react galaxyForAndroid android -d Staging",
-  "push-ios": "code-push release-react galaxyForIOS ios -d Staging"
-}
+#### 7.2、生成并上传bundle
+
+> 生成bundle文件并上传到CodePush，我们直接执行下面的命令即可
+
+```bash
+$ code-push release-react <AppName> <Platform> --t <本更新包面向的旧版本号> --des <本次更新说明>
 ```
+
+::: tip
+**CodePush** 默认是更新 **Staging** 环境的，如果发布生产环境的更新包，需要指定 `--d` 参数：`--d Production`，如果发布的是强制更新包，需要加上 `--m true` 强制更新
+:::
+
+```bash
+$ code-push release-react iOSRNHybrid ios --t 1.0.0 --dev false --des '这是第一个更新包' --d Production  --m true
+```
+
+#### 7.3、查看发布的历史记录
 
 ## 附录
 
 ### 命令
+
+#### 手动生成bundle
+
+```bash
+$ react-native bundle --platform 平台 --entry-file 启动文件 --bundle-output 打包js输出文件 --assets-dest 资源输出目录 --dev 是否调试
+```
 
 #### 账号相关
 
@@ -190,7 +210,7 @@ $ code-push release-react <AppName>
 - `code-push access-key ls`: 列出登陆的token
 - `code-push access-key rm <accessKye>`: 删除某个 access-key
 
-#### App相关
+#### app相关
 
 - `code-push app add iOSRNHybrid ios react-native`: 添加ios平台应用
 - `code-push app add iOSRNHybridForAndroid Android react-native`: 添加android平台应用
@@ -198,3 +218,8 @@ $ code-push release-react <AppName>
 - `code-push app rm`: 在账号里移除一个app
 - `code-push app rename`: 重命名一个存在的app
 - `code-push app transfer`: 把app的所有权转移到另外一个账号
+
+#### 发布相关
+
+- `code-push release-react <AppName> <Platform> --t <本更新包面向的旧版本号> --des <本次更新说明> --d <Staging/Production> --m <是否强制更新>`
+- `code-push deployment history <projectName> <Staging/Production>`

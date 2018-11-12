@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<plist version="1.0">
+<plist version="0.0.1">
   <dict>
     <key>CFBundleDevelopmentRegion</key>
     <string>en</string>
@@ -54,6 +54,6 @@
       </dict>
     </dict>
     <key>CodePushDeploymentKey</key>
-    <string>AHczKQqbdn0S2nZMatoda3QlRr-Wfd7531f1-ea0b-4829-94e7-35586f21eb25</string>
+    <string>UYXDUJ9b0PQuQinik7lRAmV68BLlfd7531f1-ea0b-4829-94e7-35586f21eb25</string>
   </dict>
 </plist>
