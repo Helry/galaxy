@@ -10,8 +10,8 @@ import com.facebook.react.bridge.ReactMethod;
  * 原生模块
  * 一个原生模块是一个继承了ReactContextBaseJavaModule的 Java 类，它可以实现一些 JavaScript 所需的功能。
  */
-public class IsDebug extends ReactContextBaseJavaModule {
-  public IsDebug(ReactApplicationContext reactContext) {
+public class IsDebugModule extends ReactContextBaseJavaModule {
+  public IsDebugModule(ReactApplicationContext reactContext) {
     super(reactContext);
   }
   /**
@@ -21,7 +21,7 @@ public class IsDebug extends ReactContextBaseJavaModule {
    */
   @Override
   public String getName() {
-    return "IsDebug";
+    return "IsDebugModule";
   }
 
   @ReactMethod
