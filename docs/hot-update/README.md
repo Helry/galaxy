@@ -196,9 +196,14 @@ $ code-push release-react iOSRNHybrid ios --t 1.0.0 --dev false --des '这是第
 $ code-push deployment history <projectName> <Staging/Production>
 ```
 
-## 附录
+## 八、附录
 
-### 命令
+### 8.1、参考
+
+- [CodePush热更新详细接入教程](http://t.cn/EAtVS21)
+- [React Native热更新部署/热更新-CodePush最新集成总结(新)](http://t.cn/EAHMYiw)
+
+### 8.2、命令
 
 #### 手动生成bundle
 
