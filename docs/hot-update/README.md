@@ -192,6 +192,10 @@ $ code-push release-react iOSRNHybrid ios --t 1.0.0 --dev false --des '这是第
 
 #### 7.3、查看发布的历史记录
 
+```bash
+$ code-push deployment history <projectName> <Staging/Production>
+```
+
 ## 附录
 
 ### 命令
@@ -221,5 +225,5 @@ $ react-native bundle --platform 平台 --entry-file 启动文件 --bundle-outpu
 
 #### 发布相关
 
-- `code-push release-react <AppName> <Platform> --t <本更新包面向的旧版本号> --des <本次更新说明> --d <Staging/Production> --m <是否强制更新>`
-- `code-push deployment history <projectName> <Staging/Production>`
+- `code-push release-react <AppName> <Platform> --t <本更新包面向的旧版本号> --des <本次更新说明> --d <Staging/Production> --m <是否强制更新>`: 发布新的热更新版本
+- `code-push deployment history <projectName> <Staging/Production>`: 查看部署历史
