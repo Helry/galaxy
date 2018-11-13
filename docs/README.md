@@ -246,7 +246,7 @@ MYAPP_RELEASE_STORE_PASSWORD=****
 MYAPP_RELEASE_KEY_PASSWORD=****
 ```
 
-4. 配置 **android/app/build.gradle**
+5. 配置 **android/app/build.gradle**
 
 ```groovy
 android{
