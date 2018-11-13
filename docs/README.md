@@ -271,6 +271,17 @@ android{
 }
 ```
 
+如果提示密码错误，而密码又是对的，那就直接如下配置：
+
+```groovy
+release {
+    storeFile file("my-release-key.keystore")
+    storePassword "123456"
+    keyAlias "my-key-alias"
+    keyPassword "123456"
+}
+```
+
 ### 5.3、打包优化
 
 #### 1、启用 Proguard 代码混淆来缩小 APK文件的大小
