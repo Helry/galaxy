@@ -17,7 +17,14 @@ module.exports = {
       { text: '配置', link: '/' },
       { text: '数据持久化', link: '/data-persistence/' },
       { text: 'Mobx', link: '/Mobx/' },
-      { text: '热更新', link: '/hot-update/' },
+      {
+        text: '热更新',
+        items: [
+          {text:'code-push','link': '/hot-update/code-push.html'},
+          {text:'react-native-update','link': '/hot-update/react-native-update.html'},
+          {text:'code-push-server','link': '/hot-update/code-push-server.html'},
+        ]
+      },
       { text: '原生模块', link: '/native-module/' }
     ], // 导航栏
     sidebar: 'auto', // 自动生成侧栏
