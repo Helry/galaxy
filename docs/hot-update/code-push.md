@@ -16,6 +16,10 @@ $ code-push register
 
 ## 三、登录App Center
 
+```bash
+$ code-push login --accessKey <accessKey>
+```
+
 回车后，会打开 **App Center** 的网址。根据提示复制密钥到命令行中回车即可：
 
 ![](https://i.loli.net/2018/11/09/5be550345956e.png)
