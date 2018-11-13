@@ -183,11 +183,11 @@ $ code-push release-react <AppName> <Platform> --t <本更新包面向的旧版�
 ```
 
 ::: tip
-**CodePush** 默认是更新 **Staging** 环境的，如果发布生产环境的更新包，需要指定 `--d` 参数：`--d Production`，如果发布的是强制更新包，需要加上 `--m true` 强制更新
+**CodePush** 默认是更新 **Staging** 环境的，如果发布生产环境的更新包，需要指定 `-d` 参数：`-d Production`，如果发布的是强制更新包，需要加上 `-m true` 强制更新
 :::
 
 ```bash
-$ code-push release-react iOSRNHybrid ios --t 1.0.0 --dev false --des '这是第一个更新包' --d Production  --m true
+$ code-push release-react iOSRNHybrid ios --t 1.0.0 --dev false --des '这是第一个更新包' -d Production  -m true
 ```
 
 #### 7.3、查看发布的历史记录
@@ -196,14 +196,79 @@ $ code-push release-react iOSRNHybrid ios --t 1.0.0 --dev false --des '这是第
 $ code-push deployment history <projectName> <Staging/Production>
 ```
 
-## 八、附录
+## 八、部署管理
 
-### 8.1、参考
+### 8.1、添加部署环境（可选）
+
+当一个用 AppCenter 服务注册的应用，它默认包含两个部署环境：`Staging` 和 `Production` 。这让你可以理解发布更新到一个内部的环境，你可以在推送到终端用户之前彻底的测试每个更新。这个工作流是至关重要的，以确保你的版本准备好给大众，而且这是一个在Web上实践很久的惯例。
+
+如果你的App有 `Staging` 和 `Production` 环境其实已经满足了你的需求，然后你不需要做任何事情。不过，如果你需要 `alpha`，`dev`等部署环境，那你可以简单的使用如下命令创建：
+
+```bash
+$ code-push deployment add <appName> <deploymentName>
+```
+
+### 8.2、部署环境key配置
+
+#### 安卓
+
+1. 打开`android/app/build.gradle`,找到 `android { buildTypes {} }` 部分并为你的 `debug` 和 `release` 构建类型都定义 `buildConfigField` 配置项。构建类型 `debug` 对应 AppCenter 发布类型 `Staging`，同理 `release` 对应 `Production`。如果你喜欢，你可以定义把你的key定义在 `gradle.properties`，然后引用他们。怎么配置全凭个人喜好。
+
+```groovy
+android {
+    ...
+    buildTypes {
+        debug {
+            ...
+            // 注意： 由于会被 RN packager 覆盖，所以CodePush 更新不应该在 Debug 模式下被测试。然而由于 CodePush 在所有模式下都会检查更新，所有我们必须提供一个key（如果你在前端判断了模式，那就不用）
+            buildConfigField "String", "CODEPUSH_KEY", '""'
+            ...
+        }
+
+        releaseStaging {
+            ...
+            buildConfigField "String", "CODEPUSH_KEY", '"<INSERT_STAGING_KEY>"'
+            ...
+        }
+
+        release {
+            ...
+            buildConfigField "String", "CODEPUSH_KEY", '"<INSERT_PRODUCTION_KEY>"'
+            ...
+        }
+    }
+    ...
+}
+```
+
+::: tip
+1. 提醒一句，你可以在命令行通过 `code-push deployment ls <APP_NAME> -k` 获取他们的 `keys`。
+2. `releaseStaging` 的命名是由于[这一行](http://t.cn/EAnyAzi)
+:::
+
+2. 通过刚刚定义的构建配置将部署密钥传递给CodePush构造函数，而不是字符串文字。
+
+打开 `src/main/.../MainApplication.java` 文件并做如下配置：
+
+```java
+@Override
+protected List<ReactPackage> getPackages() {
+    return Arrays.<ReactPackage>asList(
+        ...
+        new CodePush(BuildConfig.CODEPUSH_KEY, MainApplication.this, BuildConfig.DEBUG), // Add/change this line.
+        ...
+    );
+}
+```
+
+## 九、附录
+
+### 9.1、参考
 
 - [CodePush热更新详细接入教程](http://t.cn/EAtVS21)
 - [React Native热更新部署/热更新-CodePush最新集成总结(新)](http://t.cn/EAHMYiw)
 
-### 8.2、命令
+### 9.2、命令
 
 #### 手动生成bundle
 
@@ -215,20 +280,40 @@ $ react-native bundle --platform 平台 --entry-file 启动文件 --bundle-outpu
 
 - `code-push register`: 注册
 - `code-push login`: 登陆
+- `code-push login --accessKey <accessKey>`: 执行“无头”身份验证，而不是启动一个浏览器
 - `code-push logout`: 注销
+- `code-push whoami`: 显示与你当前认证会话相关的e-mail帐号
+
+#### token相关
+
 - `code-push access-key ls`: 列出登陆的token
 - `code-push access-key rm <accessKye>`: 删除某个 access-key
+- `code-push access-key add "VSTS Integration"`: 创建一个持久的Access Key(连同一个描述)
 
 #### app相关
 
 - `code-push app add iOSRNHybrid ios react-native`: 添加ios平台应用
 - `code-push app add iOSRNHybridForAndroid Android react-native`: 添加android平台应用
 - `code-push app ls`: 查看添加的app
-- `code-push app rm`: 在账号里移除一个app
-- `code-push app rename`: 重命名一个存在的app
+- `code-push app rm <appName>`: 在账号里移除一个app
+- `code-push app rename <appName> <newAppName>`: 重命名一个存在的app
 - `code-push app transfer`: 把app的所有权转移到另外一个账号
+
+#### 应用合作
+
+- `$ code-push collaborator add <appName> <collaboratorEmail>`: 和其它开发者在一起合作同一个CodePush应用
+- `code-push collaborator rm <appName> <collaboratorEmail>`: 解除合作者关系
+- `code-push collaborator ls <appName>`: 列出所有合作者
 
 #### 发布相关
 
-- `code-push release-react <AppName> <Platform> --t <本更新包面向的旧版本号> --des <本次更新说明> --d <Staging/Production> --m <是否强制更新>`: 发布新的热更新版本
-- `code-push deployment history <projectName> <Staging/Production>`: 查看部署历史
+- `code-push release-react <AppName> <Platform> --t <本更新包面向的旧版本号> --des <本次更新说明> -d <Staging/Production> -m <是否强制更新>`: 发布新的热更新版本
+
+#### 部署相关
+
+- `code-push deployment add <appName> <deploymentName>`: 添加部署环境
+- `code-push deployment rm <appName> <deploymentName>`: 删除部署环境
+- `code-push deployment rename <appName> <deploymentName> <newDeploymentName>`: 重命名部署环境
+- `code-push deployment ls <appName> [--displayKeys|-k]`: 查看部署环境列表
+- `code-push deployment history <projectName> <Staging/Production>`: 查看发布历史
+- `code-push deployment clear <appName> <deploymentName>`: 清除发布历史
