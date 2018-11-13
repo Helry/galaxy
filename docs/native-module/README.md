@@ -1,10 +1,10 @@
-## react-native-create-library
+## 一、react-native-create-library
 
 > [react-native-create-library](https://github.com/frostney/react-native-create-library)
 
 > 使用一个命令创建 React Native 原生库的工具
 
-### 你为什么需要这个？
+### 1.1 你为什么需要这个？
 
 如果您要为 React Native 创建原生模块，则需要为要支持的每个平台提供一些原生代码，然后和一些JavaScript代码绑定在一起。自己设置可能非常耗时。
 
@@ -12,11 +12,7 @@
 
 > 警告：这仅创建没有视图组件的原生模块。
 
-### 备选方案
-
-- [react-native-create-bridge](http://t.cn/EAxIi3G)
-
-### 安装
+### 1.2 安装
 
 ```bash
 $ react-native-create-library MyFancyLibrary
@@ -24,7 +20,7 @@ $ react-native-create-library MyFancyLibrary
 
 这个命令将会创建一个 `MyFancyLibrary` 文件夹，现在可以执行 `yarn install` 来为你新创建的 `Library` 安装依赖。
 
-### 命令
+### 1.3 命令
 
 > `react-native-create-library [options] <name>`
 
@@ -43,7 +39,7 @@ $ react-native-create-library MyFancyLibrary
 - `--license <license> `: The license type of this library (Default: `Apache-2.0`)
 - ` --generate-example <shouldGenerate>`: 会生成一个 RN 例子并且 `link` 刚生成的库（默认：`false`）
 
-### 程序化使用
+### 1.4 程序化使用
 
 ```js
 const createLibrary = require('react-native-create-library');
@@ -73,8 +69,8 @@ createLibrary({
 }
 ```
 
-## react-native-create-bridge
+## 二、react-native-create-bridge
 
 > [peggyrayzis/react-native-create-bridge](https://github.com/peggyrayzis/react-native-create-bridge)
 
-> 一种可轻松连接React Native模块和UI组件的 CLI工具🎉
+> 一种可轻松连接React Native模块和UI组件的 CLI工具🎉，它可以作为 `react-native-create-library` 的备选方案
