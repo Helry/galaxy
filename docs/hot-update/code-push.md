@@ -160,7 +160,7 @@ export default (CodePush) => {
 }
 ```
 
-### 6.3 如何发布CodePush更新包
+## 七、 如何发布CodePush更新包
 
 #### 7.1、手动生成bundle包【可略过】
 
