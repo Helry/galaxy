@@ -265,6 +265,8 @@ protected List<ReactPackage> getPackages() {
 
 ### 9.1、参考
 
+- [Microsoft/code-push ](http://t.cn/RUzsKDO)
+- [Microsoft/react-native-code-push](http://t.cn/R4Nzj11)
 - [CodePush热更新详细接入教程](http://t.cn/EAtVS21)
 - [React Native热更新部署/热更新-CodePush最新集成总结(新)](http://t.cn/EAHMYiw)
 
