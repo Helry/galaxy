@@ -61,13 +61,22 @@ $ code-push app list
 ### 6.1 安装
 
 > 执行 `link` 命令会让你输入 `Android` 和 `iOS` 两个平台的 `key`，可以忽略，也可以直接填写。
-> 在 `ios` 中将 `staging` 的部署 `key` 复制在 `info.plist`的 `CodePushDeploymentKey` 值中，
-> 在 `android` 中复制在 `Application` 的 `getPackages` 的 `CodePush` 中。
 
 ```bash
 $ yarn add react-native-code-push
 $ react-native link react-native-code-push
 ```
+
+::: tip
+可以通过 `code-push deployment ls <appName> -k` 命令查看应用的key
+:::
+
+### 6.2 配置 key
+
+> 这节是可选的，如果事多部署环境的话请参考第九节
+
+- 在 `ios` 中将 `staging` 的部署 `key` 复制在 `info.plist`的 `CodePushDeploymentKey` 值中，
+- 在 `android` 中复制在 `Application` 的 `getPackages` 的 `CodePush` 中或 `<string moduleConfig="true" name="reactNativeCodePush_androidDeploymentKey"><!--here your code-push key--></string>` 中
 
 ### 6.2 配置
 
@@ -187,11 +196,11 @@ $ code-push release-react <AppName> <Platform> --t <本更新包面向的旧版�
 ```
 
 ::: tip
-**CodePush** 默认是更新 **Staging** 环境的，如果发布生产环境的更新包，需要指定 `-d` 参数：`-d Production`，如果发布的是强制更新包，需要加上 `-m true` 强制更新
+**CodePush** 默认是更新 **Staging** 环境的，如果发布生产环境的更新包，需要指定 `-d` 参数：`-d Production`，如果发布的是强制更新包，需要加上 `-m true` 强制更新。`--dev` 为是否启用开发者模式（默认为 false）
 :::
 
 ```bash
-$ code-push release-react iOSRNHybrid ios --t 1.0.0 --dev false --des '这是第一个更新包' -d Production  -m true
+$ code-push release-react iOSRNHybrid ios --t 1.0.0 --des '这是第一个更新包' -d Production  -m true
 ```
 
 #### 7.3、查看发布的历史记录
@@ -200,9 +209,7 @@ $ code-push release-react iOSRNHybrid ios --t 1.0.0 --dev false --des '这是第
 $ code-push deployment history <projectName> <Staging/Production>
 ```
 
-## 八、部署管理
-
-### 8.1、添加部署环境（可选）
+## 八、添加部署环境（可选）
 
 当一个用 AppCenter 服务注册的应用，它默认包含两个部署环境：`Staging` 和 `Production` 。这让你可以理解发布更新到一个内部的环境，你可以在推送到终端用户之前彻底的测试每个更新。这个工作流是至关重要的，以确保你的版本准备好给大众，而且这是一个在Web上实践很久的惯例。
 
@@ -212,9 +219,9 @@ $ code-push deployment history <projectName> <Staging/Production>
 $ code-push deployment add <appName> <deploymentName>
 ```
 
-### 8.2、部署环境key配置
+## 九、多部署环境key配置
 
-#### 安卓
+### 9.1、安卓
 
 1. 打开`android/app/build.gradle`,找到 `android { buildTypes {} }` 部分并为你的 `debug` 和 `release` 构建类型都定义 `buildConfigField` 配置项。构建类型 `debug` 对应 AppCenter 发布类型 `Staging`，同理 `release` 对应 `Production`。如果你喜欢，你可以定义把你的key定义在 `gradle.properties`，然后引用他们。怎么配置全凭个人喜好。
 
@@ -265,16 +272,42 @@ protected List<ReactPackage> getPackages() {
 }
 ```
 
-## 九、附录
+### 9.2 iOS
 
-### 9.1、参考
+<!-- todo -->
+
+#### 关于多部署打包
+
+**Production**
+
+```bash
+$ cd android && ./gradlew assembleRelease
+```
+
+```bash
+$ cd android && ./gradlew installRelease
+```
+
+**Staging**
+
+```bash
+$ cd android && ./gradlew assembleReleaseStaging
+```
+
+```bash
+$ cd android && ./gradlew installReleaseStaging
+```
+
+## 十、附录
+
+### 10.1、参考
 
 - [Microsoft/code-push ](http://t.cn/RUzsKDO)
 - [Microsoft/react-native-code-push](http://t.cn/R4Nzj11)
 - [CodePush热更新详细接入教程](http://t.cn/EAtVS21)
 - [React Native热更新部署/热更新-CodePush最新集成总结(新)](http://t.cn/EAHMYiw)
 
-### 9.2、命令
+### 10.2、命令
 
 #### 手动生成bundle
 
