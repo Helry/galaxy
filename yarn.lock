@@ -8994,6 +8994,11 @@ react-native-drawer-layout@1.3.2:
   dependencies:
     react-native-dismiss-keyboard "1.0.0"
 
+react-native-native-info@^0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/react-native-native-info/-/react-native-native-info-0.0.1.tgz#215a92c6b3968213973a008697bb5b54a797e9b8"
+  integrity sha512-MEgpYTDeYCnCKPVdNcYM6+T+fP0PZ64yFkmsk/8aVJek44MQQOLUbqlZclYcQn5701X8/WbTS6GTioUHzjbw4Q==
+
 react-native-safe-area-view@0.11.0:
   version "0.11.0"
   resolved "http://registry.npm.taobao.org/react-native-safe-area-view/download/react-native-safe-area-view-0.11.0.tgz#4f3dda43c2bace37965e7c6aef5fc83d4f19d174"

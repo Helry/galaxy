@@ -321,21 +321,22 @@ $ cd android && ./gradlew installReleaseStaging
 $ react-native bundle --platform 平台 --entry-file 启动文件 --bundle-output 打包js输出文件 --assets-dest 资源输出目录 --dev 是否调试
 ```
 
-#### 账号相关
+#### 创建账号
 
-- `code-push register`: 注册
-- `code-push login`: 登陆
+- `code-push register`: 注册账号
+- `code-push link`: CodePush提供商有Github和Mircosoft，它允许你可以把两个帐号关联起来。
+
+#### 身份认证
+
+- `code-push login`: 登录
+- `code-push whoami`: 显示与你当前认证会话相关的e-mail帐号
 - `code-push login --accessKey <accessKey>`: 执行“无头”身份验证，而不是启动一个浏览器
 - `code-push logout`: 注销
-- `code-push whoami`: 显示与你当前认证会话相关的e-mail帐号
-
-#### token相关
-
 - `code-push access-key ls`: 列出登陆的token
 - `code-push access-key rm <accessKye>`: 删除某个 access-key
 - `code-push access-key add "VSTS Integration"`: 创建一个持久的Access Key(连同一个描述)
 
-#### app相关
+#### 应用管理
 
 - `code-push app add iOSRNHybrid ios react-native`: 添加ios平台应用
 - `code-push app add iOSRNHybridForAndroid Android react-native`: 添加android平台应用
@@ -350,11 +351,7 @@ $ react-native bundle --platform 平台 --entry-file 启动文件 --bundle-outpu
 - `code-push collaborator rm <appName> <collaboratorEmail>`: 解除合作者关系
 - `code-push collaborator ls <appName>`: 列出所有合作者
 
-#### 发布相关
-
-- `code-push release-react <AppName> <Platform> --t <本更新包面向的旧版本号> --des <本次更新说明> -d <Staging/Production> -m <是否强制更新>`: 发布新的热更新版本
-
-#### 部署相关
+#### 部署管理
 
 - `code-push deployment add <appName> <deploymentName>`: 添加部署环境
 - `code-push deployment rm <appName> <deploymentName>`: 删除部署环境
@@ -362,3 +359,7 @@ $ react-native bundle --platform 平台 --entry-file 启动文件 --bundle-outpu
 - `code-push deployment ls <appName> [--displayKeys|-k]`: 查看部署环境列表
 - `code-push deployment history <projectName> <Staging/Production>`: 查看发布历史
 - `code-push deployment clear <appName> <deploymentName>`: 清除发布历史
+
+#### 发布更新
+
+- `code-push release-react <AppName> <Platform> --t <本更新包面向的旧版本号> --des <本次更新说明> -d <Staging/Production> -m <是否强制更新>`: 发布新的热更新版本

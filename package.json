@@ -24,8 +24,8 @@
     "bundle-android": "react-native bundle --platform android --entry-file index.js --bundle-output ./bundle/android/main.jsbundle --assets-dest ./bundle/android --dev false",
     "bundle-ios": "react-native bundle --platform ios --entry-file index.js --bundle-output ./bundle/ios/main.jsbundle --assets-dest ./bundle/ios --dev false",
     "push-staging": "yarn push-an-staging && yarn push-ios-staging",
-    "push-an-staging": "code-push release-react galaxyForAndroid android",
-    "push-ios-staging": "code-push release-react galaxyForIOS ios",
+    "push-an-staging": "code-push release-react galaxyForAndroid android --dev true",
+    "push-ios-staging": "code-push release-react galaxyForIOS ios --dev true",
     "push-production": "yarn push-an-production && yarn push-ios-production",
     "push-an-production": "code-push release-react galaxyForAndroid android --t 0.0.1 --d Production --m true",
     "push-ios-production": "code-push release-react galaxyForIOS ios --t 0.0.1 --d Production --m true",
@@ -42,6 +42,7 @@
     "react-native": "0.57.4",
     "react-native-add-custom-props": "^0.2.0",
     "react-native-code-push": "^5.4.2",
+    "react-native-native-info": "^0.0.1",
     "react-navigation": "^2.18.2"
   },
   "devDependencies": {

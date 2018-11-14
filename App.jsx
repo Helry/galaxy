@@ -7,6 +7,7 @@
 import React, { Component } from 'react'
 import { StyleSheet, Image, View, Button } from 'react-native'
 import CodePush from 'react-native-code-push'
+import RNNativeInfo from 'react-native-native-info'
 import checkHotUpdate from './src/utils/checkHotUpdate'
 import { ToastExample } from './src/components/Yang'
 
@@ -26,6 +27,11 @@ class App extends Component {
     }
   }
 
+  getBuildType = async () => {
+    const buildType = await RNNativeInfo.getBuildType()
+    alert(`构建类型：${buildType}`)
+  }
+
   render() {
     return (
       <View style={styles.container}>
@@ -36,7 +42,13 @@ class App extends Component {
         />
         <Button
           onPress={() => ToastExample.show('Awesome', ToastExample.SHORT)}
-          title="调用原生模块"
+          title="调用原生方法"
+          color="#841584"
+          accessibilityLabel="Learn more about this purple button"
+        />
+        <Button
+          onPress={this.getBuildType}
+          title="构建类型"
           color="#841584"
           accessibilityLabel="Learn more about this purple button"
         />
