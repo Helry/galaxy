@@ -460,8 +460,8 @@ def releaseTime() {
 android: {
     applicationVariants.all { variant ->
     		variant.outputs.all {
-            // the apk name is e.g. sishucloudapp_v1.0_2018-11-1.apk
-            outputFileName = "sishucloudapp_${defaultConfig.versionName}_${releaseTime()}.apk"
+            // the apk name is e.g. galaxy_v1.0.1_2018-11-1_debug.apk
+            outputFileName = "galaxy_v${defaultConfig.versionName}_${releaseTime()}_${variant.buildType.name}.apk"
         }
         ...
     }
