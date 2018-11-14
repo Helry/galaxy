@@ -183,6 +183,7 @@ configurations.all {
 }
 
 dependencies {
+    compile project(':react-native-native-info')
     implementation project(':react-native-code-push')
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation "com.android.support:appcompat-v7:${rootProject.ext.supportLibVersion}"

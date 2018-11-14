@@ -39,6 +39,7 @@
 		ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */; };
 		9407AE89C3A84984B120FAEF /* libCodePush.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E81E9800E4043D780912486 /* libCodePush.a */; };
 		CF78A0624A3B4891BB10DD6B /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 49781C5BE9C24C4DA4118009 /* libz.tbd */; };
+		77D4247C36DD4507B0B98F42 /* libRNNativeInfo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B3199566E28A4C0785173471 /* libRNNativeInfo.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -347,6 +348,8 @@
 		665C55E1525A465BB38B5815 /* CodePush.xcodeproj */ = {isa = PBXFileReference; name = "CodePush.xcodeproj"; path = "../node_modules/react-native-code-push/ios/CodePush.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
 		5E81E9800E4043D780912486 /* libCodePush.a */ = {isa = PBXFileReference; name = "libCodePush.a"; path = "libCodePush.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 		49781C5BE9C24C4DA4118009 /* libz.tbd */ = {isa = PBXFileReference; name = "libz.tbd"; path = "usr/lib/libz.tbd"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = sourcecode.text-based-dylib-definition; explicitFileType = undefined; includeInIndex = 0; };
+		53C6A6AF921D4E9EAF64E48C /* RNNativeInfo.xcodeproj */ = {isa = PBXFileReference; name = "RNNativeInfo.xcodeproj"; path = "../node_modules/react-native-native-info/ios/RNNativeInfo.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		B3199566E28A4C0785173471 /* libRNNativeInfo.a */ = {isa = PBXFileReference; name = "libRNNativeInfo.a"; path = "libRNNativeInfo.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -376,6 +379,7 @@
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
 				9407AE89C3A84984B120FAEF /* libCodePush.a in Frameworks */,
 				CF78A0624A3B4891BB10DD6B /* libz.tbd in Frameworks */,
+				77D4247C36DD4507B0B98F42 /* libRNNativeInfo.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -564,6 +568,7 @@
 				00C302DF1ABCB9EE00DB3ED1 /* RCTVibration.xcodeproj */,
 				139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */,
 				665C55E1525A465BB38B5815 /* CodePush.xcodeproj */,
+				53C6A6AF921D4E9EAF64E48C /* RNNativeInfo.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -1192,10 +1197,12 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)\..\node_modules\react-native-code-push\ios\CodePush/**",
+					"$(SRCROOT)\..\node_modules\react-native-native-info\ios",
 				);
 			};
 			name = Debug;
@@ -1218,10 +1225,12 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)\..\node_modules\react-native-code-push\ios\CodePush/**",
+					"$(SRCROOT)\..\node_modules\react-native-native-info\ios",
 				);
 			};
 			name = Release;
@@ -1245,6 +1254,7 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)\..\node_modules\react-native-code-push\ios\CodePush/**",
+					"$(SRCROOT)\..\node_modules\react-native-native-info\ios",
 				);
 			};
 			name = Debug;
@@ -1267,6 +1277,7 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)\..\node_modules\react-native-code-push\ios\CodePush/**",
+					"$(SRCROOT)\..\node_modules\react-native-native-info\ios",
 				);
 			};
 			name = Release;
@@ -1297,10 +1308,12 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)\..\node_modules\react-native-code-push\ios\CodePush/**",
+					"$(SRCROOT)\..\node_modules\react-native-native-info\ios",
 				);
 			};
 			name = Debug;
@@ -1331,10 +1344,12 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)\..\node_modules\react-native-code-push\ios\CodePush/**",
+					"$(SRCROOT)\..\node_modules\react-native-native-info\ios",
 				);
 			};
 			name = Release;
@@ -1364,10 +1379,12 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)\..\node_modules\react-native-code-push\ios\CodePush/**",
+					"$(SRCROOT)\..\node_modules\react-native-native-info\ios",
 				);
 			};
 			name = Debug;
@@ -1397,10 +1414,12 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)\..\node_modules\react-native-code-push\ios\CodePush/**",
+					"$(SRCROOT)\..\node_modules\react-native-native-info\ios",
 				);
 			};
 			name = Release;
