@@ -5,11 +5,10 @@
  */
 
 import React, { Component } from 'react'
-import { StyleSheet, Image, View, Button } from 'react-native'
+import { StyleSheet, Text, View } from 'react-native'
 import CodePush from 'react-native-code-push'
 import RNNativeInfo from 'react-native-native-info'
 import checkHotUpdate from './src/utils/checkHotUpdate'
-import { ToastExample } from './src/components/Yang'
 
 const codePushOptions = {
   // 设置检查更新的频率
@@ -20,38 +19,30 @@ const codePushOptions = {
 }
 
 class App extends Component {
-  componentDidMount() {
+  constructor(props) {
+    super(props)
+    this.state = {
+      buildType: '',
+      debug: false,
+    }
+  }
+
+  async componentDidMount() {
     CodePush.disallowRestart()// 禁止重启
     if (!__DEV__) {
       checkHotUpdate(CodePush) // 开始检查更新
     }
-  }
-
-  getBuildType = async () => {
     const buildType = await RNNativeInfo.getBuildType()
-    alert(`构建类型：${buildType}`)
+    const debug = await RNNativeInfo.getDebug()
+    this.setState({ buildType, debug })
   }
 
   render() {
+    const { buildType, debug } = this.state
     return (
       <View style={styles.container}>
-        <Image
-          resizeMode="cover"
-          source={{ uri: 'https://placeimg.com/400/400/any' }}
-          style={[styles.welcome]}
-        />
-        <Button
-          onPress={() => ToastExample.show('Awesome', ToastExample.SHORT)}
-          title="调用原生方法"
-          color="#841584"
-          accessibilityLabel="Learn more about this purple button"
-        />
-        <Button
-          onPress={this.getBuildType}
-          title="构建类型"
-          color="#841584"
-          accessibilityLabel="Learn more about this purple button"
-        />
+        <Text>构建类型：{buildType}</Text>
+        <Text>debug：{`${debug}`}</Text>
       </View>
     )
   }
@@ -63,10 +54,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#F2F2F2',
-  },
-  welcome: {
-    width: 400,
-    height: 400,
   },
 })
 
