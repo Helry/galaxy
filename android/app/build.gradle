@@ -133,13 +133,19 @@ android {
     }
     buildTypes {
         debug {
-            buildConfigField "String", "CODEPUSH_KEY", '"LRcceeF7bWUb2aHmRoF26fozN6hTfd7531f1-ea0b-4829-94e7-35586f21eb25"'
+            buildConfigField "String", "CODEPUSH_KEY", '""'
         }
-
         releaseStaging {
+            matchingFallbacks = ['release', 'debug']
             buildConfigField "String", "CODEPUSH_KEY", '"LRcceeF7bWUb2aHmRoF26fozN6hTfd7531f1-ea0b-4829-94e7-35586f21eb25"'
+            debuggable false // 是否debug
+            aaptOptions.cruncherEnabled = false // 禁止Gradle检查PNG的合法性
+            shrinkResources true // 移除无用的resource文件
+            zipAlignEnabled true // 对齐zip
+            signingConfig signingConfigs.release
+            minifyEnabled enableProguardInReleaseBuilds
+            proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
         }
-
         release {
             buildConfigField "String", "CODEPUSH_KEY", '"mmz0HOQHOTwqR7wU3k6CyjKhoZq-fd7531f1-ea0b-4829-94e7-35586f21eb25"'
             debuggable false // 是否debug
@@ -177,10 +183,12 @@ configurations.all {
 }
 
 dependencies {
-    compile project(':react-native-code-push')
-    implementation fileTree(dir: "libs", include: ["*.jar"])
-    implementation "com.android.support:appcompat-v7:${rootProject.ext.supportLibVersion}" // http://t.cn/EAJJIMc
-    implementation "com.facebook.react:react-native:+"  // From node_modules
+    implementation project(':react-native-code-push')
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation "com.android.support:appcompat-v7:${rootProject.ext.supportLibVersion}"
+    // http://t.cn/EAJJIMc
+    implementation 'com.facebook.react:react-native:+'
+    // From node_modules
 }
 
 // Run this once to be able to run the application with BUCK
