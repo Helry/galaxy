@@ -56,7 +56,7 @@ $ code-push app add iOSRNHybridForAndroid Android react-native
 $ code-push app list
 ```
 
-## 六、RN 集成 code-push
+## 六、集成 react-native-code-push
 
 ### 6.1 安装
 
@@ -71,14 +71,14 @@ $ react-native link react-native-code-push
 可以通过 `code-push deployment ls <appName> -k` 命令查看应用的key
 :::
 
-### 6.2 配置 key
+### 6.2 配置
 
 > 这节是可选的，如果事多部署环境的话请参考第九节
 
 - 在 `ios` 中将 `staging` 的部署 `key` 复制在 `info.plist`的 `CodePushDeploymentKey` 值中，
 - 在 `android` 中复制在 `Application` 的 `getPackages` 的 `CodePush` 中或 `<string moduleConfig="true" name="reactNativeCodePush_androidDeploymentKey"><!--here your code-push key--></string>` 中
 
-### 6.2 配置
+### 6.3 使用
 
 我们在RN项目的根组件中添加热更新逻辑代码如下：
 
@@ -175,7 +175,7 @@ export default (CodePush) => {
 
 ## 七、 如何发布CodePush更新包
 
-#### 7.1、手动生成bundle包【可略过】
+### 7.1、手动生成bundle包【可略过】
 
 ::: tip
 在将RN的 `bundle` 放到 **AppCenter** 服务器之前，我们需要先生成 `bundle`，再将 `bundle` 上传到 **AppCenter**。用到的文件夹必须已经存在。
@@ -187,7 +187,7 @@ export default (CodePush) => {
 $ react-native bundle --platform android --entry-file index.js --bundle-output ./bundle/android/main.jsbundle --assets-dest ./bundle/android --dev false
 ```
 
-#### 7.2、生成并上传bundle
+### 7.2、生成并上传bundle
 
 > 生成bundle文件并上传到CodePush，我们直接执行下面的命令即可
 
@@ -203,7 +203,7 @@ $ code-push release-react <AppName> <Platform> --t <本更新包面向的旧版�
 $ code-push release-react iOSRNHybrid ios --t 1.0.0 --des '这是第一个更新包' -d Production  -m true
 ```
 
-#### 7.3、查看发布的历史记录
+### 7.3、查看发布的历史记录
 
 ```bash
 $ code-push deployment history <projectName> <Staging/Production>
@@ -274,11 +274,17 @@ protected List<ReactPackage> getPackages() {
 
 ### 9.2 iOS
 
-<!-- todo -->
+::: warning
+TODO: iOS 多部署
+:::
 
-#### 关于多部署打包
+### 关于多部署打包
 
-**Production**
+::: danger
+如果报 `Unable to find a matching configuration of project :react-native-code-push` 的错误，请参考 [http://t.cn/EAex4XH](http://t.cn/EAex4XH) 解决。
+:::
+
+#### 打Production包
 
 ```bash
 $ cd android && ./gradlew assembleRelease
@@ -288,7 +294,7 @@ $ cd android && ./gradlew assembleRelease
 $ cd android && ./gradlew installRelease
 ```
 
-**Staging**
+#### 打Staging包
 
 ```bash
 $ cd android && ./gradlew assembleReleaseStaging
