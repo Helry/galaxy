@@ -141,7 +141,7 @@ android {
         }
 
         release {
-            buildConfigField "String", "CODEPUSH_KEY", '"	mmz0HOQHOTwqR7wU3k6CyjKhoZq-fd7531f1-ea0b-4829-94e7-35586f21eb25"'
+            buildConfigField "String", "CODEPUSH_KEY", '"mmz0HOQHOTwqR7wU3k6CyjKhoZq-fd7531f1-ea0b-4829-94e7-35586f21eb25"'
             debuggable false // 是否debug
             aaptOptions.cruncherEnabled = false // 禁止Gradle检查PNG的合法性
             shrinkResources true // 移除无用的resource文件

@@ -25,7 +25,14 @@ module.exports = {
           {text:'code-push-server','link': '/hot-update/code-push-server.html'},
         ]
       },
-      { text: '原生模块', link: '/native-module/' }
+      {
+        text: '原生',
+        items: [
+          {test:'Android', link: '/Native/Android.html'},
+          {test:'iOS', link: '/Native/iOS.html'},
+          {test:'脚手架', link: '/Native/脚手架.html'},
+        ]
+      }
     ], // 导航栏
     sidebar: 'auto', // 自动生成侧栏
     lastUpdated: 'Last Updated', // 最后更新时间
