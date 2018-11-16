@@ -6,8 +6,8 @@ project.ext.react = [
 
 project.ext.envConfigFiles = [
     debug: ".env.debug",
-    release: ".env.release",
-    releaseStaging: ".env.releaseStaging",
+    release: ".env.production",
+    stagingrelease: ".env.staging",
 ]
 
 import com.android.build.OutputFile
@@ -153,9 +153,10 @@ android {
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
         }
         // NOTE: The naming convention for releaseStaging is significant due to http://t.cn/EAnyAzi
-        releaseStaging.initWith(release)
-        releaseStaging {
-            matchingFallbacks = ['releaseStaging', 'release', 'debug']
+        // NOTE: The naming convention for stagingrelease is significant due to http://t.cn/E2U1nLX
+        stagingrelease.initWith(release)
+        stagingrelease {
+            matchingFallbacks = ['stagingRelease', 'release', 'debug']
             buildConfigField "String", "CODEPUSH_KEY", '"LRcceeF7bWUb2aHmRoF26fozN6hTfd7531f1-ea0b-4829-94e7-35586f21eb25"'
         }
     }

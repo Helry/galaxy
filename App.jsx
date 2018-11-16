@@ -34,7 +34,8 @@ class App extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>{JSON.stringify(Config)}</Text>
+        <Text>{`构建类型：${Config.BUILD_TYPE}`}</Text>
+        <Text>{`TIME_API_URL：${Config.TIME_API_URL}`}</Text>
       </View>
     )
   }
