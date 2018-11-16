@@ -7,7 +7,6 @@ import android.content.res.Resources;
 import com.yang.YangPackage; // <-- 引入你自己的包
 import com.facebook.react.ReactApplication;
 import com.lugg.ReactNativeConfig.ReactNativeConfigPackage;
-import com.reactlibrary.RNNativeInfoPackage;
 import com.microsoft.codepush.react.CodePush;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
@@ -36,7 +35,6 @@ public class MainApplication extends Application implements ReactApplication {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
             new ReactNativeConfigPackage(),
-            new RNNativeInfoPackage(),
             new YangPackage(), // <-- 添加这一行，类名替换成你的Package类的名字.
             // new CodePush(getResources().getString(R.string.reactNativeCodePush_androidDeploymentKey), getApplicationContext(), BuildConfig.DEBUG)
             new CodePush(BuildConfig.CODEPUSH_KEY, MainApplication.this, BuildConfig.DEBUG)

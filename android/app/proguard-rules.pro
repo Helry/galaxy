@@ -36,3 +36,5 @@
 #保持源码的行号、源文件信息不被混淆 方便在崩溃日志中查看
 -renamesourcefileattribute SourceFile
 -keepattributes SourceFile,LineNumberTable
+
+-keep class com.galaxy.BuildConfig { *; }

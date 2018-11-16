@@ -14,9 +14,21 @@ module.exports = {
     editLinks: true,
     editLinkText: '帮助我们改善此页面！',
     nav: [
-      { text: '配置', link: '/' },
-      { text: '数据持久化', link: '/data-persistence/' },
-      { text: 'Mobx', link: '/Mobx/' },
+      { text: 'Get Start', link: '/' },
+      {
+        text: '原生',
+        items: [
+          {text:'Android', link: '/Native/Android.html'},
+          {text:'iOS', link: '/Native/iOS.html'},
+          {text:'脚手架', link: '/Native/脚手架.html'},
+        ]
+      },
+      {
+        text: '数据持久化',
+        items: [
+          {text:'react-native-localstorage', link: '/data-persistence/react-native-localstorage.html'},
+        ]
+      },
       {
         text: '热更新',
         items: [
@@ -26,11 +38,10 @@ module.exports = {
         ]
       },
       {
-        text: '原生',
+        text: '更多',
         items: [
-          {test:'Android', link: '/Native/Android.html'},
-          {test:'iOS', link: '/Native/iOS.html'},
-          {test:'脚手架', link: '/Native/脚手架.html'},
+          {text:'axios', link: '/more-lib/axios.html'},
+          {text: 'mobx', link: '/more-lib/mobx.html'},
         ]
       }
     ], // 导航栏

@@ -1,13 +1,12 @@
 /**
- * react-native-template-youngjuning
- * https://github.com/youngjuning/react-native-template-youngjuning
+ * galaxy
+ * https://github.com/youngjuning/galaxy
  * @author youngjuning
  */
 
 import React, { Component } from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 import CodePush from 'react-native-code-push'
-import RNNativeInfo from 'react-native-native-info'
 import Config from 'react-native-config'
 import checkHotUpdate from './src/utils/checkHotUpdate'
 
@@ -22,10 +21,6 @@ const codePushOptions = {
 class App extends Component {
   constructor(props) {
     super(props)
-    this.state = {
-      buildType: '',
-      debug: false,
-    }
   }
 
   async componentDidMount() {
@@ -33,18 +28,13 @@ class App extends Component {
     if (!__DEV__) {
       checkHotUpdate(CodePush) // 开始检查更新
     }
-    const buildType = await RNNativeInfo.getBuildType()
-    const debug = await RNNativeInfo.getDebug()
-    this.setState({ buildType, debug })
     console.log('Config', Config)
   }
 
   render() {
-    const { buildType, debug } = this.state
     return (
       <View style={styles.container}>
-        <Text>构建类型：{buildType}</Text>
-        <Text>debug：{`${debug}`}</Text>
+        <Text>{JSON.stringify(Config)}</Text>
       </View>
     )
   }
