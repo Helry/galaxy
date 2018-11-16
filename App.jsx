@@ -8,6 +8,7 @@ import React, { Component } from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 import CodePush from 'react-native-code-push'
 import RNNativeInfo from 'react-native-native-info'
+import Config from 'react-native-config'
 import checkHotUpdate from './src/utils/checkHotUpdate'
 
 const codePushOptions = {
@@ -35,6 +36,7 @@ class App extends Component {
     const buildType = await RNNativeInfo.getBuildType()
     const debug = await RNNativeInfo.getDebug()
     this.setState({ buildType, debug })
+    console.log('Config', Config)
   }
 
   render() {
