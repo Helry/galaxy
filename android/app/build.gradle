@@ -114,7 +114,7 @@ android {
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
-        versionName "0.0.2"
+        versionName "0.0.3"
         ndk {
             abiFilters "armeabi-v7a", "x86"
         }
@@ -140,7 +140,7 @@ android {
     }
     buildTypes {
         debug {
-            buildConfigField "String", "CODEPUSH_KEY", '"LRcceeF7bWUb2aHmRoF26fozN6hTfd7531f1-ea0b-4829-94e7-35586f21eb25"'
+            buildConfigField "String", "CODEPUSH_KEY", '""'
         }
         release {
             buildConfigField "String", "CODEPUSH_KEY", '"mmz0HOQHOTwqR7wU3k6CyjKhoZq-fd7531f1-ea0b-4829-94e7-35586f21eb25"'

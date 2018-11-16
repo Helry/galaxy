@@ -25,9 +25,7 @@ class App extends Component {
 
   async componentDidMount() {
     CodePush.disallowRestart()// 禁止重启
-    if (!__DEV__) {
-      checkHotUpdate(CodePush) // 开始检查更新
-    }
+    checkHotUpdate(CodePush)
     console.log('Config', Config)
   }
 
