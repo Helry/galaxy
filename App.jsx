@@ -25,16 +25,15 @@ class App extends Component {
 
   async componentDidMount() {
     CodePush.disallowRestart()// 禁止重启
-    if (!__DEV__) {
-      checkHotUpdate(CodePush) // 开始检查更新
-    }
+    checkHotUpdate(CodePush)
     console.log('Config', Config)
   }
 
   render() {
     return (
       <View style={styles.container}>
-        <Text>{JSON.stringify(Config)}</Text>
+        <Text>{`构建类型：${Config.BUILD_TYPE}`}</Text>
+        <Text>{`TIME_API_URL：${Config.TIME_API_URL}`}</Text>
       </View>
     )
   }
