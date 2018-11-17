@@ -1,4 +1,3 @@
 <resources>
-    <!-- <string moduleConfig="true" name="reactNativeCodePush_androidDeploymentKey">mmz0HOQHOTwqR7wU3k6CyjKhoZq-fd7531f1-ea0b-4829-94e7-35586f21eb25</string> -->
     <string name="app_name">银河</string>
 </resources>
