@@ -50,12 +50,12 @@ $ react-native init AwesomeProject
 - 你还可以使用 `--tepmlate` 参数创建指定模版的项目。例如 `react-native init MyApp --template youngjuning`。模版可以去 npm 搜索，格式是 `react-native-template-*`
 :::
 
-### react-native 0.57.* 适配
+### 3.1 react-native 0.57.* 适配
 
 - [react-native-releases/CHANGELOG.md](http://t.cn/EwYmviS)
 - [react-native版本迁移教程](https://www.jianshu.com/p/cc0174b4a9c5)
 
-### ES6 装饰器(decorators)及runtime 支持
+### 3.2 ES6 装饰器(decorators)及runtime 支持
 
 1. 安装babel相关库： `yarn add @babel/core @babel/plugin-proposal-decorators @babel/plugin-transform-runtime @babel/runtime`
 2. 如果使用了装饰器（Mobx用得到），则需要配置 `.babelrc`:
@@ -66,7 +66,7 @@ $ react-native init AwesomeProject
 ]
 ```
 
-### Symbol语法支持
+### 3.3 Symbol语法支持
 
 > 如果还不知道 Symbol 为何物的朋友，墙裂推荐读读 [ES6的Symbol竟然那么强大，面试中的加分点啊](http://t.cn/EwuvKej) 这篇文章
 
